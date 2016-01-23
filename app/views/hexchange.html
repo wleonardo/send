@@ -1,0 +1,32 @@
+<div class="hexchange_view">
+    <div class="form_part nav_tabs_tool">
+        <ul class="nav nav-tabs">
+            <li class="active" ng-click='panel_index = "one"'><a href="javascript:void(0)">进制转换</a></li>
+        </ul>
+        <div class=" pre_set_part bg-white nav_tabs_detail show">
+            <div>
+                <div class="input-group m-b margin-bottom">
+                    <div class="input-group-btn">
+                        <button type="button" data-toggle="dropdown" class="btn btn-default" aria-expanded="false">{{first_hex}}进制
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="detail in hex_number" ng-click="change_first_hex({{detail}})"><a>{{detail}}进制</a></li>
+                        </ul>
+                    </div>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="input-group m-b">
+                    <div class="input-group-btn">
+                        <button type="button" data-toggle="dropdown" class="btn btn-default" aria-expanded="false">{{second_hex}}进制
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="detail in hex_number" ng-click="change_second_hex({{detail}})"><a>{{detail}}进制</a></li>
+                        </ul>
+                    </div>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>

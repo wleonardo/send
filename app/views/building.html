@@ -1,0 +1,75 @@
+<div class="buildingset_view">
+    <div class="form_part nav_tabs_tool">
+        <ul class="nav nav-tabs">
+            <li ng-class="panel_index == undefined || panel_index == 'one' ?'active':''" ng-click='panel_index = "one"'><a href="javascript:void(0)">图书设置</a></li>
+            <li ng-class="panel_index == 'two'?'active':''" ng-click='panel_index = "two"'><a href="javascript:void(0)">类型管理</a></li>
+        </ul>
+        <div class="pre_set_part bg-white nav_tabs_detail" ng-class="panel_index == undefined || panel_index == 'one' ?'show':'hidden'">
+            <div class="tree">
+                <ul>
+                    <li ng-repeat="country in vm.countries" ng-class="{closed:vm.tree.isFolded(country)}">
+                        <div>
+                            <input type="checkbox" ng-model="country.checked" ng-change="vm.tree.check(country, country.checked)" ng-class="{intermediate: vm.tree.isSemiChecked(country),'hidden':!vm.selectbox}" />
+                            <span ng-click="vm.tree.toggleFold(country)">
+            <span class="fa" ng-class="vm.tree.isFolded(country)?'fa-plus':'fa-minus'"></span> {{country.label}}
+                            </span>
+                        </div>
+                        <ul ng-class="{hidden: vm.tree.isFolded(country)}">
+                            <li ng-repeat="province in country.items" ng-class="{closed:vm.tree.isFolded(province)}">
+                                <input type="checkbox" ng-model="province.checked" ng-change="vm.tree.check(province, province.checked)" ng-class="{intermediate: vm.tree.isSemiChecked(province),'hidden':!vm.selectbox}" />
+                                <span ng-click="vm.tree.toggleFold(province)">
+              <span class="fa" ng-class="vm.tree.isFolded(province)?'fa-plus':'fa-minus'"></span> {{province.label}}
+                                </span>
+                                <ul ng-class="{hidden: vm.tree.isFolded(province)}">
+                                    <li ng-repeat="city in province.items">
+                                        <label ng-mouseleave="city.showdelete = false" ng-mouseover="city.showdelete = true">
+                                            <input type="checkbox" ng-model="city.checked" ng-change="vm.tree.check(city, city.checked)" ng-class="{'hidden':!vm.selectbox}" /> {{city.label}}
+                                            <span class="fa fa-trash-o" ng-class="{'showspan':city.showdelete,'hidden':!city.showdelete}" ng-click="vm.tree.deleteitem(city,province)"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label ng-click="vm.tree.additem(province)"><i class=" fa fa-plus-circle"></i> 增加</label>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="pre_set_part bg-white nav_tabs_detail" ng-class="panel_index == 'two' ?'show':'hidden'">
+            <div class="radio c-radio form-part">
+                <label>寝室人数</label>
+                <label>
+                    <input type="radio" name="b" value="option1">
+                    <span class="fa fa-circle"></span>1人</label>
+                <label>
+                    <input type="radio" name="b" value="option1">
+                    <span class="fa fa-circle"></span>2人</label>
+                <label>
+                    <input type="radio" name="b" value="option1">
+                    <span class="fa fa-circle"></span>3人</label>
+                <label>
+                    <input type="radio" name="b" value="option1">
+                    <span class="fa fa-circle"></span>4人</label>
+                <label>
+                    <input type="radio" name="b" value="option1">
+                    <span class="fa fa-circle"></span>5人</label>
+                <label>
+                    <input type="radio" name="b" value="option1">
+                    <span class="fa fa-circle"></span>6人</label>
+                <label>
+                    <input type="radio" name="b" value="option1">
+                    <span class="fa fa-circle"></span>7人</label>
+                <label>
+                    <input type="radio" name="b" value="option1">
+                    <span class="fa fa-circle"></span>8人</label>
+            </div>
+            <div class="radio c-radio form-part">
+                <label></label>
+                <label class="clear_padding">
+                    <button type="button" class="mb-sm btn btn-primary">保存设置</button>
+                </label>
+            </div>
+        </div>
+    </div>

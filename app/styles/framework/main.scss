@@ -1,0 +1,172 @@
+$DefaultMargin:15px;
+.main_section {
+    backgrounf-color: #fff;
+}
+
+.modal {
+    left: 220px;
+    top: 55px;
+}
+
+.modal-backdrop {
+    display: none
+}
+
+.panel_default {
+    margin-bottom: $DefaultMargin;
+}
+
+.clearboth {
+    clear: both;
+}
+
+.form-group {
+    .form_date {
+        width: 100%;
+    }
+}
+
+.visibility {
+    visibility: hidden !important;
+}
+
+.table-responsive {
+    overflow-x: initial;
+    .handle_button {
+        color: #5d9cec;
+        cursor: pointer;
+    }
+}
+
+.btn-unselect {
+    background-color: #fff;
+    color: #5d9cec;
+    border: 1px solid #5899eb;
+}
+
+@each $deatil in left,
+right,
+top,
+bottom {
+    .margin-#{$deatil} {
+        margin-#{$deatil}: $DefaultMargin;
+    }
+}
+
+@each $deatil in left,
+right,
+top,
+bottom {
+    .padding-#{$deatil} {
+        padding-#{$deatil}: $DefaultMargin;
+    }
+}
+
+.padding-empty {
+    padding: 0 !important;
+}
+
+@each $deatil in left,
+right,
+top,
+bottom {
+    .padding-#{$deatil}-empty {
+        padding-#{$deatil}: 0px;
+    }
+}
+
+@each $deatil in left,
+right,
+top,
+bottom {
+    .margin-#{$deatil}-empty {
+        margin-#{$deatil}: 0px !important;
+    }
+}
+
+.input-height {
+    line-height: 35px;
+    height: 35px !important;
+}
+
+.time_part {
+    height: 35px;
+    margin-bottom: 0px !important;
+}
+
+.panel_main {
+    width: 100%;
+    padding: $DefaultMargin;
+    border: 1px solid #dde6e9;
+    margin-bottom: $DefaultMargin;
+    .panel_dashed {
+        border: 1px dashed #ddd;
+        padding: $DefaultMargin;
+    }
+}
+
+#table-ext-1 {
+    th {
+        width: auto;
+        &:nth-child(1) {
+            width: 20%;
+            min-width: 150px;
+        }
+        &:last-child {
+            width: 100px;
+        }
+    }
+    .btn-xs {
+        font-size: 12px;
+    }
+}
+
+.loader-demo {
+    z-index: 1000;
+    padding-left: 220px;
+    position: absolute;
+    width: 100%;
+    top: -webkit-calc(50% - 75px);
+}
+
+.modal {
+    .modal-body {
+        .form-group {
+            height: 35px;
+            &:last-child {
+                margin-bottom: 0px;
+                height: auto;
+                textarea {
+                    float: initial;
+                }
+            }
+            .des_text {
+                line-height: 35px;
+                margin-right: $DefaultMargin;
+            }
+        }
+    }
+}
+
+.tree {
+    border: 1px dashed #ddd;
+    width: 200px;
+    padding-top: $DefaultMargin;
+    li {
+        cursor: pointer;
+        padding-left: $DefaultMargin;
+        label {
+            cursor: pointer;
+            .fa-trash-o {
+                padding-left: 5px;
+            }
+        }
+    }
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    .intermediate {
+        opacity: 0.3;
+    }
+}

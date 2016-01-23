@@ -1,0 +1,286 @@
+<div class="peoplemanage_view">
+    <div class="form_part nav_tabs_tool">
+        <ul class="nav nav-tabs">
+            <li ng-class="panel_index == undefined || panel_index == 'one' ?'active':''" ng-click='panel_index = "one"'><a href="javascript:void(0)">部门管理</a></li>
+            <li ng-class="panel_index == 'two'?'active':''" ng-click='panel_index = "two"'><a href="javascript:void(0)">员工管理</a></li>
+        </ul>
+        <div class="pre_set_part bg-white nav_tabs_detail" ng-class="panel_index == undefined || panel_index == 'one' ?'show':'hidden'">
+            <a type="button" class="mb-sm btn btn-success add-btn" ng-click="show_add_modal()">新增</a>
+            <div class="table-responsive">
+                <table id="table-ext-1" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>部门名</th>
+                            <th>备注</th>
+                            <th ng-if="history_time_data.status != 'CLOSED'">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="detail in department_list">
+                            <td>{{detail.name}}</td>
+                            <td>{{detail.ps?detail.ps:'无'}}</td>
+                            <td>
+                                <button type="button" class="mb-sm btn btn-info btn-xs" ng-click='show_edit_modal({{detail.id}},"{{detail.name}}","{{detail.ps}}")'>修改</button>
+                                <button type="button" class="mb-sm btn btn-danger btn-xs" ng-click='delete_department({{detail.id}},"{{detail.name}}")'>删除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class=" pre_set_part bg-white nav_tabs_detail " ng-class="panel_index=='two' ? 'show': 'hidden' ">
+            <div class="form-group col-lg-4 col-sm-4 padding-right-empty">
+                <div for="name" class="pull-left des_text">部门</div>
+                <select class="form-control col-sm-9 col-lg-8" ng-model="search_type">
+                    <option value='loanid'>借阅证</option>
+                    <option value='sex'>性别</option>
+                    <option value='department'>部门</option>
+                    <option value='username'>姓名</option>
+                    <option value='userId'>员工号</option>
+                    <option value='other'>不选择</option>
+                </select>
+            </div>
+            <div class="form-group col-lg-3 col-sm-3 padding-right-empty" ng-show="search_type != undefined">
+                <select class="form-control col-sm-9 col-lg-8" ng-show="search_type == 'sex'" ng-model="search_condition">
+                    <option value='0'>男</option>
+                    <option value='1'>女</option>
+                </select>
+                <input class="form-control col-sm-9 col-lg-8" ng-show="search_type != 'sex' && search_type != undefined" ng-model="search_condition">
+            </div>
+            <a type="button" class="mb-sm btn btn-info margin_side" ng-click='search_staff()'>查询</a>
+            <a type="button" class="mb-sm btn btn-success margin_side pull-right" ng-click='show_add_staff_modal()'>新增</a>
+        </div>
+    </div>
+    <div class="panel panel-default " ng-class="staff_list.length > 0  && panel_index == 'two'?'active':'hidden'" style="margin-top: 15px;">
+        <!-- START table-responsive-->
+        <div class="table-responsive">
+            <table id="table-ext-1" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>员工号</th>
+                        <th>姓名</th>
+                        <th>借阅证</th>
+                        <th>所属部门</th>
+                        <th>性别</th>
+                        <th>手机号</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="detail in staff_list">
+                        <td>{{detail.employee}}</td>
+                        <td>{{detail.username}}</td>
+                        <td>{{detail.loanid}}</td>
+                        <td>{{detail.department}}</td>
+                        <td>{{detail.sex?'女':'男'}}</td>
+                        <td>{{detail.mobile_phone}}</td>
+                        <td>
+                            <button type="button" class="mb-sm btn btn-info btn-xs" ng-click='show_staff_edit_modal({{detail}})'>修改</button>
+                            <button type="button" class="mb-sm btn btn-danger btn-xs" ng-click='delete_staff({{detail}})'>删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- END table-responsive-->
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-6" ng-hide="staff_list_page.firstPage && staff_list_page.lastPage">
+                    <nav class="pull-right">
+                        <ul class="pagination pagination-sm m0">
+                            <li ng-if="!staff_list_page.firstPage">
+                                <a href="#" aria-label="Previous" ng-click='search_staff(1)'>
+                                    <span aria-hidden="true">«</span>
+                                </a>
+                            </li>
+                            <li ng-if="staff_list_page.lastPage && staff_list_page.now - 4 > 0"><a ng-click='search_staff(staff_list_page.now - 4)'>{{staff_list_page.now - 4 }}</a>
+                            </li>
+                            <li ng-if="!staff_list_page.firstPage && staff_list_page.now -3 > 0 && staff_list_page.now + 2 > staff_list_page.total"><a ng-click='search_staff(staff_list_page.now - 3)'>{{staff_list_page.now - 3 }}</a>
+                            </li>
+                            <li ng-if="!staff_list_page.firstPage && staff_list_page.now -2 > 0"><a ng-click='search_staff(staff_list_page.now - 2)'>{{staff_list_page.now - 2 }}</a>
+                            </li>
+                            <li ng-if="!staff_list_page.firstPage"><a ng-click='search_staff(staff_list_page.now - 1)'>{{staff_list_page.now - 1 }}</a>
+                            </li>
+                            <li class="active"><a>{{staff_list_page.now}}</a>
+                            </li>
+                            <li ng-if="!staff_list_page.lastPage "><a ng-click='search_staff(staff_list_page.now + 1)'>{{staff_list_page.now + 1 }}</a>
+                            </li>
+                            <li ng-if="!staff_list_page.lastPage && staff_list_page.now + 2 <= staff_list_page.total"><a ng-click='search_staff(staff_list_page.now + 2)'>{{staff_list_page.now + 2 }}</a>
+                            </li>
+                            <li ng-if="!staff_list_page.lastPage && staff_list_page.now + 3 <= staff_list_page.total && staff_list_page.now -3 <= 0"><a ng-click='search_staff(staff_list_page.now + 3)'>{{staff_list_page.now + 3 }}</a>
+                            </li>
+                            <li ng-if="staff_list_page.firstPage && staff_list_page.now + 4 <= staff_list_page.total"><a ng-click='search_staff(staff_list_page.now + 4)'>{{staff_list_page.now + 4 }}</a>
+                            </li>
+                            <li ng-if="!staff_list_page.lastPage ">
+                                <a href="#" aria-label="Next" ng-click='search_staff(staff_list_page.total)'>
+                                    <span aria-hidden="true">»</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+               新增部门
+            </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group padding-right-empty">
+                        <div for="name" class="des_text pull-left" style="line-height:35px;">部门名字</div>
+                        <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" placeholder="请输入部门名字" ng-model="dep_name">
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div for="name" class="des_text pull-left" style="line-height:35px;">部门备注</div>
+                        <textarea class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" rows="3" placeholder="请输入部门备注" ng-model="dep_ps"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="add_department('{{dep_name}}','{{dep_ps}}')">
+                        确认
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+               修改部门信息
+            </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group padding-right-empty">
+                        <div for="name" class="des_text pull-left" style="line-height:35px;">部门名字</div>
+                        <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" placeholder="请输入部门名字" ng-model="edit_name">
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div for="name" class="des_text pull-left">部门备注</div>
+                        <textarea class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" rows="3" placeholder="请输入部门备注" ng-model="edit_ps"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="edit_department()">
+                        确认
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    <div class="modal fade" id="AddStaffModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+               新增员工
+            </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group padding-right-empty">
+                        <div class="des_text pull-left">用户名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" placeholder="请输入员工用户名" ng-model="add_staff_username">
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div class="des_text pull-left">员工名字</div>
+                        <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" placeholder="请输入员工名字" ng-model="add_staff_name">
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div class="des_text pull-left">员工电话</div>
+                        <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" placeholder="请输入员工电话" ng-model="add_staff_tel">
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div for="name" class="pull-left des_text">所属部门</div>
+                        <select class="form-control col-sm-6 col-lg-6" ng-model="add_staff_department_id">
+                            <option ng-repeat="detail in department_list" value={{detail.id}}>{{detail.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div for="name" class="des_text pull-left">员工备注</div>
+                        <textarea class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" rows="3" placeholder="请输入员工备注" ng-model="add_staff_ps"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="add_staff()">
+                        确认添加
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    <div class="modal fade" id="EditStaffModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+               新增员工
+            </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group padding-right-empty">
+                        <div class="des_text pull-left">用户名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" placeholder="请输入员工用户名" ng-model="edit_staff_detail.username">
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div class="des_text pull-left">员工名字</div>
+                        <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" placeholder="请输入员工名字" ng-model="edit_staff_detail.name">
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div class="des_text pull-left">员工电话</div>
+                        <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" placeholder="请输入员工电话" ng-model="edit_staff_detail.tel">
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div for="name" class="pull-left des_text">所属部门</div>
+                        <select class="form-control col-sm-6 col-lg-6" ng-model="edit_staff_detail.department_id">
+                            <option ng-repeat="detail in department_list" value={{detail.id}}>{{detail.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div for="name" class="des_text pull-left">员工备注</div>
+                        <textarea class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" rows="3" placeholder="请输入员工备注" ng-model="edit_staff_detail.ps"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="edit_staff()">
+                        确认修改
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>

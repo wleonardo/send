@@ -1,0 +1,176 @@
+<div class="history_view">
+    <div class="form_part nav_tabs_tool">
+        <ul class="nav nav-tabs">
+            <li class="active" ng-click='panel_index = "one"'><a href="javascript:void(0)">管理员管理</a></li>
+        </ul>
+        <div class=" pre_set_part bg-white nav_tabs_detail show">
+            <div class="form-group col-lg-3 col-sm-6 visibility">
+                <input type='text' class="form-control col-sm-12 col-lg-12" ng-model="search_condition" placeholder="请输入编号或者姓名">
+            </div>
+            <a type="button" class="mb-sm btn btn-info margin_side visibility" ng-click='get_admin_data()' disabled>查询</a>
+            <a type="button" class="mb-sm btn btn-success margin_side pull-right" ng-click='show_add_admin_modal()'>新增</a>
+        </div>
+    </div>
+    <div class="panel panel-default " ng-class="admin_list.length > 0 ?'active':'hidden'" style="margin-top: 15px;">
+        <!-- START table-responsive-->
+        <div class="table-responsive">
+            <table id="table-ext-1" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>管理员号</th>
+                        <th>管理员姓名</th>
+                        <th style="width:auto;">角色</th>
+                        <!-- <th>操作</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="detail in admin_list">
+                        <td>{{detail.userId}}</td>
+                        <td>{{detail.username}}</td>
+                        <td>{{detail.role | level_name}}</td>
+                        <!-- <td>
+    <button type="button" class="mb-sm btn btn-info btn-xs" ng-click='show_admin_edit_modal({{detail}})'>修改</button>
+    <button type="button" class="mb-sm btn btn-danger btn-xs" ng-click='delete_admin({{detail}})'>删除</button>
+</td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- END table-responsive-->
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-6" ng-hide="admin_list_page.firstPage && admin_list_page.lastPage">
+                    <nav class="pull-right">
+                        <ul class="pagination pagination-sm m0">
+                            <li ng-if="!admin_list_page.firstPage">
+                                <a href="#" aria-label="Previous" ng-click='get_admin_data(1)'>
+                                    <span aria-hidden="true">«</span>
+                                </a>
+                            </li>
+                            <li ng-if="admin_list_page.lastPage && admin_list_page.currentPage - 4 > 0"><a ng-click='get_admin_data(admin_list_page.currentPage - 4)'>{{admin_list_page.currentPage - 4 }}</a>
+                            </li>
+                            <li ng-if="!admin_list_page.firstPage && admin_list_page.currentPage -3 > 0 && admin_list_page.currentPage + 2 > admin_list_page.totalPage"><a ng-click='get_admin_data(admin_list_page.currentPage - 3)'>{{admin_list_page.currentPage - 3 }}</a>
+                            </li>
+                            <li ng-if="!admin_list_page.firstPage && admin_list_page.currentPage -2 > 0"><a ng-click='get_admin_data(admin_list_page.currentPage - 2)'>{{admin_list_page.currentPage - 2 }}</a>
+                            </li>
+                            <li ng-if="!admin_list_page.firstPage"><a ng-click='get_admin_data(admin_list_page.currentPage - 1)'>{{admin_list_page.currentPage - 1 }}</a>
+                            </li>
+                            <li class="active"><a>{{admin_list_page.currentPage}}</a>
+                            </li>
+                            <li ng-if="!admin_list_page.lastPage "><a ng-click='get_admin_data(admin_list_page.currentPage + 1)'>{{admin_list_page.currentPage + 1 }}</a>
+                            </li>
+                            <li ng-if="!admin_list_page.lastPage && admin_list_page.currentPage + 2 <= admin_list_page.totalPage"><a ng-click='get_admin_data(admin_list_page.currentPage + 2)'>{{admin_list_page.currentPage + 2 }}</a>
+                            </li>
+                            <li ng-if="!admin_list_page.lastPage && admin_list_page.currentPage + 3 <= admin_list_page.totalPage && admin_list_page.currentPage -3 <= 0"><a ng-click='get_admin_data(admin_list_page.currentPage + 3)'>{{admin_list_page.currentPage + 3 }}</a>
+                            </li>
+                            <li ng-if="admin_list_page.firstPage && admin_list_page.currentPage + 4 <= admin_list_page.totalPage"><a ng-click='get_admin_data(admin_list_page.currentPage + 4)'>{{admin_list_page.currentPage + 4 }}</a>
+                            </li>
+                            <li ng-if="!admin_list_page.lastPage ">
+                                <a href="#" aria-label="Next" ng-click='get_admin_data(admin_list_page.totalPage)'>
+                                    <span aria-hidden="true">»</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+               新增管理员
+            </h4>
+                </div>
+                <form method="get" action='http://115.29.37.191:8080/Library/library/admin/insertAAdmin/admin' enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="form-group padding-right-empty">
+                            <div for="name" class="des_text pull-left">设置登陆账号</div>
+                            <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" placeholder="请输入账号" ng-model="add_admin.username">
+                        </div>
+                        <div class="form-group padding-right-empty">
+                            <div for="name" class="des_text pull-left">设置登陆密码</div>
+                            <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" placeholder="请输入密码" ng-model="add_admin.password">
+                        </div>
+                        <div class="form-group padding-right-empty">
+                            <div class="des_text pull-left">设置管理权限</div>
+                            <select class="form-control col-sm-6 col-lg-6" ng-model="add_admin.role">
+                                <option value="1">普通管理员</option>
+                            </select>
+                        </div>
+                        <div class="form-group padding-right-empty" style="height:35px;">
+                            <div for="name" class="des_text pull-left">设置管理员 ID</div>
+                            <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" placeholder="请输入账号" ng-model="add_admin.userId">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="submit" class="btn btn-primary" ng-click="add_admin()">
+                            确认添加
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    <div class="modal fade" id="EditAdminModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+               新增员工
+            </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group padding-right-empty hide">
+                        <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" ng-model="edit_admin_detail.userId" disabled>
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div class="des_text pull-left">驾驶员用户名</div>
+                        <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" ng-model="edit_admin_detail.userId" disabled>
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div for="name" class="des_text pull-left">设置登陆账号</div>
+                        <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" placeholder="请输入账号" ng-model="edit_admin_detail.username">
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div class="des_text pull-left">设置管理权限</div>
+                        <select class="form-control col-sm-6 col-lg-6" ng-model="edit_admin_detail.level">
+                            <option value="1" selected>普通管理员</option>
+                        </select>
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div for="name" class="des_text pull-left">设置登陆密码</div>
+                        <input type="text" class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" placeholder="请输入密码" ng-model="edit_admin_detail.password">
+                    </div>
+                    <div class="form-group padding-right-empty">
+                        <div for="name" class="des_text pull-left">管理员的备注</div>
+                        <textarea class="form-control col-sm-6 col-lg-6 ng-pristine ng-valid ng-touched" rows="3" placeholder="请输入员工备注" ng-model="edit_admin_detail.ps"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="edit_car()">
+                        确认修改
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+</div>

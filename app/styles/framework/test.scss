@@ -1,0 +1,41 @@
+.test_view {
+    .select_panel {
+        .ps_span {
+            display: inline-block;
+            float: left;
+            min-width: 70px;
+        }
+        .detail_span {
+            display: inline-block;
+        }
+        .param_div {
+            display: inline-block;
+            width: 500px;
+            .detail_param {
+                span {
+                    display: inline-block;
+                    min-width: 15px;
+                    text-align: center;
+                }
+            }
+        }
+        .resp_data_span {
+            width: calc(100% - 130px);
+        }
+        .form-group {
+            .des_text {
+                line-height: 35px;
+                padding-right: 15px;
+            }
+        }
+        .margin_side {
+            margin: 0px $DefaultMargin;
+        }
+        .btn-success {
+            margin-left: 15px;
+        }
+    }
+    .closed {
+        color: #ccc;
+    }
+}

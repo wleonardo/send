@@ -1,0 +1,27 @@
+<div class="unixtime_view">
+    <div class="panel panel-default">
+        <div class="panel-heading">RGB 转 16进制</div>
+        <div class="panel-body row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="form-group margin-bottom input-height">
+                    <span class="pull-left padding-right title-info">Unix时间戳</span>
+                    <input type="text" class="form-control col-sm-4 margin-right ng-pristine ng-valid ng-touched" ng-model="time.unix" placeholder="" ng-change="totime()">
+                    <span class="text-danger" ng-show="verify_unix()">数值不合法</span>
+                </div>
+                <div class="form-group margin-bottom input-height">
+                    <span class="pull-left padding-right title-info">北京时间</span>
+                    <input type="text" class="form-control col-sm-4 margin-right ng-pristine ng-valid ng-touched" ng-model="time.time" placeholder="例如:2008/05/30 12:20:11" ng-change="tounix()">
+                    <span class="text-danger" ng-show="verify_time()">数值不合法</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-show="js_info_show">
+        <div class="panel-heading padding-bottom-empty">
+            提示
+        </div>
+        <div class="panel-body">
+            <p>JavaScript的时间是精确到毫秒的，所以为13位数字</p>
+        </div>
+    </div>
+</div>

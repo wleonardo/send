@@ -1,0 +1,105 @@
+<!-- START Sidebar (left)-->
+<div class="aside-inner">
+    <nav data-sidebar-anyclick-close="" class="sidebar">
+        <!-- START sidebar nav-->
+        <ul class="nav">
+            <!-- START user info-->
+            <li class="has-user-block">
+                <div id="user-block" class="collapse">
+                    <div class="item user-block">
+                        <!-- User picture-->
+                        <div class="user-block-picture">
+                            <div class="user-block-status">
+                                <img src="images/user/02.jpg" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
+                                <div class="circle circle-success circle-lg"></div>
+                            </div>
+                        </div>
+                        <!-- Name and Job-->
+                        <div class="user-block-info">
+                            <span class="user-block-name">Hello, Mike</span>
+                            <span class="user-block-role">Designer</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <!-- END user info-->
+            <!-- Iterates over all sidebar items-->
+            <li class=" ">
+                <a data-target="#dashboard" title="Dashboard" data-toggle="collapse">
+                    <em class="icon-basket"></em>
+                    <span data-localize="sidebar.nav.DASHBOARD">借阅管理</span>
+                </a>
+                <ul id="dashboard" class="nav sidebar-subnav collapse" ng-class="name == 'history' || name == 'test' ?'in':''">
+                    <li>
+                        <a href="./#/test" ng-class="{'active':name == 'test'}">
+                            <span>接口测试</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="./#/history" ng-class="{'active':name == 'history'}">
+                            <span>借阅查询</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="">
+                            <span>水电费录入</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class=" ">
+                <a data-target="#elements" title="Elements" data-toggle="collapse">
+                    <em class="icon-pie-chart"></em>
+                    <span data-localize="sidebar.nav.element.ELEMENTS">人员管理</span>
+                </a>
+                <ul id="elements" class="nav sidebar-subnav collapse" ng-class="name == 'color' || name == 'unixtime' || name == 'hexchange' || name == 'carmanage'?'in':''">
+                    <li class=" ">
+                        <a href="./#/color" ng-class="{'active':name == 'color'}">
+                            <span data-localize="sidebar.nav.element.BUTTON">颜色转换</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="./#/unixtime" ng-class="{'active':name == 'unixtime'}">
+                            <span data-localize="sidebar.nav.element.NOTIFICATION">时间戳转换</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="./#/hexchange" ng-class="{'active':name == 'hexchange'}">
+                            <span data-localize="sidebar.nav.element.NOTIFICATION">进制转换</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="./#/carmanage" ng-class="{'active':name == 'carmanage'}">
+                            <span data-localize="sidebar.nav.element.NOTIFICATION">车辆管理</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class=" ">
+                <a data-target="#forms" title="Forms" data-toggle="collapse">
+                    <em class="icon-settings"></em>
+                    <span data-localize="sidebar.nav.form.FORM">设置</span>
+                </a>
+                <ul id="forms" class="nav sidebar-subnav collapse" ng-class="name == 'payset' || name == 'building' ?'in':''">
+                    <li class=" ">
+                        <a href="./#/payset" ng-class="{'active':name == 'payset'}">
+                            <span data-localize="sidebar.nav.form.STANDARD">缴费模式设置</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="./#/building" ng-class="{'active':name == 'building'}">
+                            <span data-localize="sidebar.nav.form.EXTENDED">楼栋寝室设置</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="">
+                            <span data-localize="sidebar.nav.form.VALIDATION">基础设置</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- END sidebar nav-->
+    </nav>
+</div>
+<!-- END Sidebar (left)-->

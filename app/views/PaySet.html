@@ -1,0 +1,172 @@
+<div class="payset_view">
+    <div class="form_part nav_tabs_tool">
+        <ul class="nav nav-tabs">
+            <li ng-class="panel_index == undefined || panel_index == 'one' ?'active':''" ng-click='panel_index = "one"'><a href="javascript:void(0)">前付费缴费模式</a></li>
+            <li ng-class="panel_index == 'two'?'active':''" ng-click='panel_index = "two"'><a href="javascript:void(0)">后付费缴费模式</a></li>
+        </ul>
+        <div class="pre_set_part bg-white nav_tabs_detail" ng-class="panel_index == undefined || panel_index == 'one' ?'show':'hidden'">
+            <div class="radio c-radio form-part">
+                <label>模式状态</label>
+                <label>
+                    <input type="radio" name="a" value="option1">
+                    <span class="fa fa-circle"></span>开启</label>
+                <label>
+                    <input type="radio" name="a" value="option1">
+                    <span class="fa fa-circle"></span>关闭</label>
+            </div>
+            <div class="form-group form-part">
+                <label for="input-id-1" class="control-label">微信关键词</label>
+                <div class="form-part-input">
+                    <input id="input-id-1" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group form-part">
+                <label class="control-label textarea_label">续费提醒</label>
+                <div class="form-part-input">
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="radio c-radio form-part">
+                <label>微信模板消息</label>
+                <label>
+                    <input type="radio" name="b" value="option1">
+                    <span class="fa fa-circle"></span>开启</label>
+                <label>
+                    <input type="radio" name="b" value="option1">
+                    <span class="fa fa-circle"></span>关闭</label>
+            </div>
+            <div class="form-group form-part">
+                <label for="input-id-2" class="control-label">欠费提醒</label>
+                <div class="form-part-input">
+                    <input id="input-id-2" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="radio c-radio form-part">
+                <label>开启支付</label>
+                <label>
+                    <input type="radio" name="c" value="option1">
+                    <span class="fa fa-circle"></span>开启</label>
+                <label>
+                    <input type="radio" name="c" value="option1">
+                    <span class="fa fa-circle"></span>关闭（仅查询）</label>
+            </div>
+            <div class="form-group form-part">
+                <label for="input-id-3" class="control-label">支付配置</label>
+                <div class="form-part-input">
+                    <button type="button" class="mb-sm btn btn-primary">前往设置</button>
+                </div>
+            </div>
+            <div class="radio c-radio form-part">
+                <label>厂家接口</label>
+                <label>
+                    <input type="radio" name="d" value="option1">
+                    <span class="fa fa-circle"></span>查询接口</label>
+                <label>
+                    <input type="radio" name="d" value="option1">
+                    <span class="fa fa-circle"></span>接口</label>
+                <label>
+                    <input type="radio" name="d" value="option1">
+                    <span class="fa fa-circle"></span>查询</label>
+                <label>
+                    <input type="radio" name="d" value="option1">
+                    <span class="fa fa-circle"></span>关闭</label>
+            </div>
+            <div class="radio c-radio form-part">
+                <label>厂家接口</label>
+                <label class="clear_padding">长工电子：V5.21</label>
+            </div>
+            <div class="radio c-radio form-part">
+                <label></label>
+                <label class="clear_padding">
+                    <button type="button" class="mb-sm btn btn-primary">保存设置</button>
+                </label>
+            </div>
+        </div>
+        <div class="pre_set_part bg-white nav_tabs_detail" ng-class="panel_index == 'two' ?'show':'hidden'">
+            <div class="radio c-radio form-part">
+                <label>模式状态</label>
+                <label>
+                    <input type="radio" name="a" value="option1">
+                    <span class="fa fa-circle"></span>开启</label>
+                <label>
+                    <input type="radio" name="a" value="option1">
+                    <span class="fa fa-circle"></span>关闭</label>
+            </div>
+            <div class="form-group form-part">
+                <label for="input-id-1" class="control-label">微信关键词</label>
+                <div class="form-part-input">
+                    <input id="input-id-1" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group form-part">
+                <label for="input-id-2" class="control-label">缴费时间</label>
+                <div class="form-part-input">
+                    <input id="input-id-2" type="number" class="form-control">
+                </div>
+                <label for="">天</label>
+            </div>
+            <div class="form-group form-part">
+                <label class="control-label textarea_label">缴费提醒</label>
+                <div class="form-part-input">
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="radio c-radio form-part">
+                <label>微信模板消息</label>
+                <label>
+                    <input type="radio" name="b" value="option1">
+                    <span class="fa fa-circle"></span>开启</label>
+                <label>
+                    <input type="radio" name="b" value="option1">
+                    <span class="fa fa-circle"></span>关闭</label>
+            </div>
+            <div class="form-group form-part">
+                <label for="input-id-3" class="control-label">催缴提醒</label>
+                <div class="form-part-input">
+                    <input id="input-id-3" type="number" class="form-control">
+                </div>
+                <label for="">天</label>
+            </div>
+            <div class="radio c-radio form-part">
+                <label>开启支付</label>
+                <label>
+                    <input type="radio" name="c" value="option1">
+                    <span class="fa fa-circle"></span>开启</label>
+                <label>
+                    <input type="radio" name="c" value="option1">
+                    <span class="fa fa-circle"></span>关闭（仅查询）</label>
+            </div>
+            <div class="form-group form-part">
+                <label class="control-label">支付配置</label>
+                <div class="form-part-input">
+                    <button type="button" class="mb-sm btn btn-primary">前往设置</button>
+                </div>
+            </div>
+            <div class="radio c-radio form-part">
+                <label>厂家接口</label>
+                <label>
+                    <input type="radio" name="d" value="option1">
+                    <span class="fa fa-circle"></span>查询接口</label>
+                <label>
+                    <input type="radio" name="d" value="option1">
+                    <span class="fa fa-circle"></span>接口</label>
+                <label>
+                    <input type="radio" name="d" value="option1">
+                    <span class="fa fa-circle"></span>查询</label>
+                <label>
+                    <input type="radio" name="d" value="option1">
+                    <span class="fa fa-circle"></span>关闭</label>
+            </div>
+            <div class="radio c-radio form-part">
+                <label>厂家接口</label>
+                <label class="clear_padding">长工电子：V5.21</label>
+            </div>
+            <div class="radio c-radio form-part">
+                <label></label>
+                <label class="clear_padding">
+                    <button type="button" class="mb-sm btn btn-primary">保存设置</button>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
