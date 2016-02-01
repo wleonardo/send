@@ -1,0 +1,155 @@
+.todolist_view {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+    .form-group {
+        background: #fff;
+        line-height: 1.4em;
+        font-weight: 300;
+        .form-control {
+            width: 100%;
+            height: 65px;
+            font-size: 24px;
+            padding: 16px 16px 16px 60px;
+            line-height: 1.4em;
+            border-radius: 0px;
+            background: rgba(0, 0, 0, 0.003);
+            border: none;
+            box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03) !important;
+        }
+    }
+    ul.list_all {
+        border-top: 1px solid #e6e6e6;
+        background: #fff;
+        list-style: none;
+        li {
+            line-height: 58px;
+            height: 58px;
+            border-top: 1px solid #e6e6e6;
+            &:first-child {
+                border-top: 0px solid #e6e6e6;
+            }
+            &:hover {
+                .list_detail {
+                    button {
+                        display: block;
+                    }
+                }
+            }
+            &.complete {
+                .list_detail {
+                    label {
+                        color: #d9d9d9;
+                        text-decoration: line-through;
+                    }
+                }
+            }
+            .list_detail {
+                height: 58px;
+                position: relative;
+                input {
+                    height: 40px;
+                    text-align: center;
+                    width: 40px;
+                    appearance: none;
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    margin: 9px 0;
+                    &:after {
+                        content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');
+                    }
+                    &:checked:after {
+                        content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
+                    }
+                }
+                label {
+                    white-space: pre-line;
+                    word-break: break-all;
+                    padding: 15px 60px 15px 15px;
+                    margin-left: 45px;
+                    display: block;
+                    line-height: 1.2;
+                    transition: color 0.4s;
+                    font-size: 24px;
+                    font-weight: 300;
+                }
+                button {
+                    display: none;
+                    position: absolute;
+                    top: 0;
+                    right: 10px;
+                    bottom: 0;
+                    width: 40px;
+                    height: 40px;
+                    margin: 9px 0;
+                    padding: 0;
+                    font-size: 30px;
+                    color: #cc9a9a;
+                    margin-bottom: 11px;
+                    transition: color 0.2s ease-out;
+                    appearance: none;
+                    font-smoothing: antialiased;
+                    background: none;
+                    border: 0;
+                    vertical-align: baseline;
+                    &:after {
+                        content: '×';
+                    }
+                }
+            }
+        }
+    }
+    footer {
+        position: relative;
+        color: #777;
+        padding: 10px 15px;
+        height: 40px;
+        border-top: 1px solid #e6e6e6;
+        background: #fff;
+        &:before {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 50px;
+            overflow: hidden;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 8px 0 -3px #f6f6f6, 0 9px 1px -3px rgba(0, 0, 0, 0.2), 0 16px 0 -6px #f6f6f6, 0 17px 2px -6px rgba(0, 0, 0, 0.2);
+        }
+        #filters {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            left: 0;
+            li {
+                width: 17px;
+                display: inline;
+                a {
+                    text-decoration: none;
+                    border-radius: 3px;
+                    padding: 3px 7px;
+                    border: 1px solid #fff;
+                    &:hover {
+                        border: 1px solid rgba(175, 47, 47, 0.1);
+                    }
+                    &.selected {
+                        border: 1px solid rgba(175, 47, 47, 0.2);
+                    }
+                }
+            }
+        }
+        #clear-completed {
+            appearance: none;
+            background: none;
+            border: 0;
+            cursor: pointer;
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+            }
+        }
+    }
+}

@@ -1,15 +1,18 @@
 angular.module('SendApp')
-    .filter("flatinfo", function() {
-        return function(flat, sep) {
-            var flat_array = flat.split("-");
-            var fin = '';
-            if (sep == 'live') {
-                fin = flat_array[0];
-            } else if (sep == 'flat') {
-                fin = flat_array[1];
-            } else {
-                fin = flat_array[2];
+    .filter("filter_list", function() {
+        return function(list, page) {
+            if (page == 'all') {
+                return list;
             }
-            return fin;
+            if (page == 'active') {
+                return _.filter(list, function(detail) {
+                    return detail.state == 0;
+                });
+            }
+            if (page == 'completed') {
+                return _.filter(list, function(detail) {
+                    return detail.state == 1;
+                });
+            }
         };
     })

@@ -1,0 +1,31 @@
+<div class="todolist_view">
+    <div class="form-group margin-bottom-empty">
+        <input type="text" placeholder="What needs to be done?" ng-model="new_list" class="form-control" ng-keypress="add_list($event)">
+    </div>
+    <ul class="padding-left-empty list_all margin-bottom-empty">
+        <li ng-repeat="detail in list | filter_list:page" ng-class="detail.state == 1?'complete':''">
+            <div class="list_detail">
+                <input class="toggle" type="checkbox" ng-click="complete({{detail.id}})" ng-checked="{{detail.state == 1}}"></input>
+                <label class="ng-binding">{{detail.name}}</label>
+                <button class="destroy" ng-click="destroy({{detail.id}})"></button>
+            </div>
+        </li>
+    </ul>
+    <footer class="">
+        <span id="todo-count pull-left"><strong class="ng-binding">{{count()}}</strong>
+                       item left
+                    </span>
+        <ul id="filters">
+            <li>
+                <a ng-click="page = 'all'" ng-class="page=='all'?'selected':''">All</a>
+            </li>
+            <li>
+                <a ng-click="page = 'active'" ng-class="page=='active'?'selected':''">Active</a>
+            </li>
+            <li>
+                <a ng-click="page = 'completed'" ng-class="page=='completed'?'selected':''">Completed</a>
+            </li>
+        </ul>
+        <button id="clear-completed" class="pull-right">Clear completed</button>
+    </footer>
+</div>

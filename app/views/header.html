@@ -46,6 +46,10 @@
         <!-- START Right Navbar-->
         <ul class="nav navbar-nav navbar-right">
             <!-- Search icon-->
+            <li class="weather-li">
+                <div><span>{{cityname}}</span><span>{{temperature_bottom}}-{{temperature_top}}°</span></div>
+                <em class="wi" ng-class="cond_icon"></em>
+            </li>
             <li>
                 <a href="#" data-search-open="" data-toggle="modal" data-target="#borrowModal">
                     借书

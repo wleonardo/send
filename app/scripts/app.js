@@ -24,12 +24,13 @@ angular
         WEB_ROOT: 'http://115.29.37.191:8080/Library/library',
         universityId: 'gh_20b2c1230a8e',
         data: {},
+        apikey: 'f252d51f4cb8a878c664394f6dfdbecb',
         get_login_identity: function() {
             return this.data.idadmin ? this.data.idadmin : localStorage['APP_idadmin'];
 
         },
-        get_time: function() {
-            //return this.data['.expires'] ? this.data['.expires'] : localStorage['APP_.expires'];
+        get_apikey: function() {
+            return this.data;
         },
         get_refresh_token: function() {
             //return this.data.refresh_token ? this.data.refresh_token : localStorage['APP_refresh_token'];
@@ -98,6 +99,24 @@ angular
                     "": {
                         templateUrl: 'views/hexchange.html',
                         controller: 'HexChangeCtrl'
+                    },
+                    "aside": {
+                        templateUrl: "views/aside.html",
+                        controller: 'AsideCtrl'
+                    },
+                    "header": {
+                        templateUrl: "views/header.html",
+                        controller: 'HeaderCtrl'
+                    }
+                }
+
+            })
+            .state('todolist', {
+                url: '/todolist',
+                views: {
+                    "": {
+                        templateUrl: 'views/todolist.html',
+                        controller: 'TodoListCtrl'
                     },
                     "aside": {
                         templateUrl: "views/aside.html",

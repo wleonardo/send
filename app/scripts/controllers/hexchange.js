@@ -16,6 +16,5 @@ angular.module('SendApp')
         };
         $scope.change_second_hex = function(detail) {
             $scope.second_hex = detail;
-        }
-
+        };
     });
