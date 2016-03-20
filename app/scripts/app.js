@@ -127,7 +127,23 @@ angular
                         controller: 'HeaderCtrl'
                     }
                 }
-
+            })
+            .state('lang', {
+                url: '/lang',
+                views: {
+                    "": {
+                        templateUrl: 'views/lang.html',
+                        controller: 'LangCtrl'
+                    },
+                    "aside": {
+                        templateUrl: "views/aside.html",
+                        controller: 'AsideCtrl'
+                    },
+                    "header": {
+                        templateUrl: "views/header.html",
+                        controller: 'HeaderCtrl'
+                    }
+                }
             })
 
         $urlRouterProvider.otherwise('/test');

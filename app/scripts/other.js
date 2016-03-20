@@ -22,3 +22,14 @@ Date.prototype.format = function(format) {
     }
     return format;
 }
+Array.prototype.in_array = function(str) {
+    var array = this;
+    var result = 0;
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] == str) {
+            result = i + 1;
+            break;
+        }
+    }
+    return result;
+}
